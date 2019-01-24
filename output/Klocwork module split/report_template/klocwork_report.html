@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+<meta charset = "UTF-8">
+<script src = "https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
+<script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+<script src = "https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js" ></script>
+<link href = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css" rel = "stylesheet" type ="text/css"/>
+<link href = "https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel = "stylesheet" type ="text/css"/>
+<link href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel = "stylesheet" type ="text/css"/>
+<script>
+if (navigator.userAgent.indexOf("Chrome") == -1){ alert('Warning\nPlease open report using Google Chrome Browser for better user experience'); }
+$(function() {
+var jsondata = [
+
+];
+$('#example').dataTable({
+data: jsondata,
+columns: [
+{ data: 'id' },
+{ data: 'status' },
+{ data: 'code' },
+{ data: 'severity' },
+{ data: 'title' },
+{ data: 'file' },
+{ data: 'line' }
+]
+ });
+$('input.column_filter').on('keyup click', function() {
+filterColumn( $(this).parents('tr').attr('data-column')); } );
+});
+function filterColumn (i) {
+$('#example').DataTable().column(i).search(
+$('#col' + i + '_filter').val()  ).draw();}
+ </script>
+<style type ="text/css">
+td {
+overflow: hidden;
+max-width: 400px;
+word-wrap: break-word;
+}
+</style>
+</head>
+<body style="margin:2%">
+<h1>Klocwork Report</h1>
+
+
+<br>
+<table cellpadding = "3" cellspacing = "5" border = "0"  style = "width: 20%; border-spacing: 20px; border-collapse: separate; margin: 0 auto 2em auto;">
+<thead>
+</thead >
+<tbody>
+<tr id = "filter_col1" data-column = "0">
+<td><b> ID </b></td>
+<td align = "center" ><input type = "text" placeholder = "Search ID" class="column_filter"  style= "width: 370px" id="col0_filter"></td>
+</tr>
+<tr id = "filter_col2" data-column="1">
+<td><b>Status</b></td>
+<td align = "center" ><input type="text" placeholder="Search Status" class="column_filter" style= "width: 370px" id="col1_filter"></td>
+</tr>
+<tr id = "filter_col3" data-column="2">
+<td><b>Code</b></td>
+<td align = "center" ><input type="text" placeholder="Search Code"  class="column_filter" style= "width: 370px" id="col2_filter"></td>
+</tr>
+<tr id = "filter_col4" data-column="3">
+<td><b>Severity</b></td>
+<td align = "center" ><input type="text" placeholder="Search Severity : Review, Warning, Critical, Error "  class="column_filter"  style= "width: 370px" id="col3_filter"></td>
+</tr>
+ <tr id = "filter_col5" data-column = "4" >
+<td><b> Message </b></td>
+<td align = "center" ><input type = "text" placeholder = "Search Message"  class="column_filter"  style= "width: 370px" id="col4_filter"></td>
+</tr>
+<tr id = "filter_col6" data-column="5">
+<td><b>File</b></td>
+<td align = "center" ><input type="text" placeholder="Search File"  class="column_filter"  style= "width: 370px" id="col5_filter"></td>
+</tr>
+<tr id = "filter_col7" data-column="6">
+<td><b>Line</b></td>
+<td align = "center" ><input type="text" placeholder="Search Line" class="column_filter"  style= "width: 370px" id="col6_filter"></td>
+</tr>
+</tbody>
+</table>
+<div class="table-responsive">
+<table id = "example" class="display table table-striped " width="100%" >
+<thead>
+<tr>
+<th>ID</th>
+<th>Status</th>
+<th>Code</th>
+<th>Severity</th>
+<th>Message</th>
+<th>File</th>
+<th>Line</th>
+ </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+</body>
+</html>
